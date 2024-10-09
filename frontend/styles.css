@@ -1,0 +1,51 @@
+body {
+  font-family: sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#username-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#menu-container {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.btn {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: green;
+  cursor: pointer;
+  color: white;
+  margin-top: 3px;
+}
+
+#btn-joinGame {
+  width: 50%;
+}
+
+#input-gameId {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+#input-username {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px;
+}

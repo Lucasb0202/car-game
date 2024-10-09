@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Guessing Game</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="index.js"></script>
+</head>
+<body>
+  <div id="username-container">
+    <h1 id="heading-1">Choose a Username</h1>
+    <form>
+      <input id="input-username" type="text" placeholder="Username">
+      <button id="btn-createUsername" class="btn">Create</button>
+    </form>
+  </div>
+  <div id="menu-container">
+    <h1 id="heading-1">Welcome to the Car Guessing Game!</h1>
+    <button id="btn-createGame" class="btn">Create a new game</button>
+    <p>or</p>
+    <form>
+      <input id="input-gameId" type="text" placeholder="Join game using game ID">
+      <button id="btn-joinGame" class="btn">Join</button>
+    </form>
+  </div>
+</body>
+</html>
