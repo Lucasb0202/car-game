@@ -61,8 +61,8 @@
       countdownDisplay = document.createElement('h2');
       countdownDisplay.id = 'countdown';
       countdownDisplay.style.position = 'absolute'
-      countdownDisplay.style.left = '35%'
-      countdownDisplay.style.top = '35%'
+      countdownDisplay.style.left = '40%'
+      countdownDisplay.style.top = '40%'
       document.body.appendChild(countdownDisplay);
     }
     countdownDisplay.textContent = `Game starts in: ${seconds}`;
@@ -75,8 +75,8 @@
     let startMessage = document.createElement('h1');
     startMessage.textContent = 'Game has started!';
     startMessage.style.position = 'absolute'
-    startMessage.style.left = '35%'
-    startMessage.style.top = '35%'
+    startMessage.style.left = '40%'
+    startMessage.style.top = '40%'
     document.body.appendChild(startMessage);
     
   })
