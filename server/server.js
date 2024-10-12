@@ -37,20 +37,20 @@ io.on("connection", (socket) => {
 
   socket.on('joinGame', (id) => {
     gameRoom[id].players.push(backendPlayers[socket.id])
-    let countdown = 5; // Set the countdown duration in seconds
+    let countdown = 5; 
     const countdownInterval = setInterval(() => {
-      io.emit('countdown', countdown); // Send the countdown to both players
+      io.emit('countdown', countdown); 
       countdown--;
 
       if (countdown < 0) {
         clearInterval(countdownInterval);
-        io.emit('startGame', gameRoom); // Send an event to both players to start the game
+        io.emit('startGame', gameRoom); 
       }
-    }, 1000); // Countdown updates every second
+    }, 1000); 
   })
   
   socket.on('disconnect', () => {
-    io.emit('user-disconnected', `${socket.id} has disconnected.`)
+    io.emit('user-disconnected', `${backendPlayers[socket.id][username]} has disconnected.`)
     delete backendPlayers[socket.id]
   })
 })

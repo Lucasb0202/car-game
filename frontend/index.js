@@ -72,11 +72,14 @@
     let countdownDisplay = document.querySelector('#countdown');
     if (countdownDisplay) countdownDisplay.remove();
 
-    let startMessage = document.createElement('h1');
-    startMessage.textContent = 'Game has started!';
-    startMessage.style.position = 'absolute'
-    startMessage.style.left = '40%'
-    startMessage.style.top = '40%'
+    let startMessage = document.createElement('div');
+    startMessage.style.display = 'flex'
+    startMessage.style.justifyContent = 'center'
+    let carImage = document.createElement('img')
+    carImage.setAttribute('src', '/public/download.png')
+    startMessage.appendChild(carImage)
+    // startMessage.style.left = '40%'
+    // startMessage.style.top = '40%'
     document.body.appendChild(startMessage);
     
   })
