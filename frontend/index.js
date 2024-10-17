@@ -68,12 +68,16 @@
     countdownDisplay.textContent = `Game starts in: ${seconds}`;
   })
   
-  socket.on('gameLoop', (brands) => {
-    // console.log(brands)
+  socket.on('gameLoop', (brand) => {
+    console.log(brand)
     let countdownDisplay = document.querySelector('#countdown');
     if (countdownDisplay) countdownDisplay.remove();
 
+    let startDisplay = document.querySelector('#start-container');
+    if (startDisplay) startDisplay.remove()
+
     let startContainer = document.createElement('div');
+    startContainer.id = 'start-container'
     startContainer.style.display = 'flex'
     startContainer.style.flexDirection = 'column'
     startContainer.style.justifyContent = 'center'
@@ -82,7 +86,7 @@
     let carImage = document.createElement('img')
     carImage.style.height = '400px'
     carImage.style.width = '400px'
-    carImage.setAttribute('src', brands[0].image)
+    carImage.setAttribute('src', brand.image)
 
     let brandForm = document.createElement('form')
 
@@ -106,7 +110,7 @@
     
     document.querySelector('#btn-brand').addEventListener('click', (e) => {
       e.preventDefault()
-      if (document.querySelector('#input-brand').value != brands[0].brand) {
+      if (document.querySelector('#input-brand').value.toLowerCase() != brand.brand.toLowerCase()) {
         alert("Wrong Guess!")
       }
       else {

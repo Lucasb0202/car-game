@@ -18,6 +18,31 @@ gameRoom = {}
 
 const apiUrl = 'http://localhost/restapi/api.php'
 
+const roundCountdown = () => {
+  return new Promise((resolve) => {
+    let roundCountdown = 5
+    const roundCountdownInterval = setInterval(() => {
+      io.emit('roundCountdown', roundCountdown); 
+      roundCountdown--;
+      
+      if (roundCountdown < 0) {
+        clearInterval(roundCountdownInterval);
+        resolve()
+      }
+    }, 1000)
+
+  })
+}
+
+const startGame = async (data) => {
+  let round = 1
+  while (round < 5) {
+    await roundCountdown()
+    io.emit('gameLoop', data[round]);  
+    round++
+  }
+}
+
 const getBrands = async () => {
   await fetch(apiUrl, { method: 'GetRandomBrands' }) 
   .then(response => {
@@ -28,7 +53,9 @@ const getBrands = async () => {
     return response.json();
   })
   .then(data => {
-    io.emit('gameLoop', data); 
+    
+    io.emit('gameLoop', data[0]); 
+    startGame(data)
     // console.log(data);
   })
   .catch(error => {
@@ -65,8 +92,6 @@ io.on("connection", (socket) => {
       if (countdown < 0) {
         clearInterval(countdownInterval);
         getBrands()
-        // console.log(brands)
-        // io.emit('startGame', brands); 
       }
     }, 1000); 
   })
