@@ -19,7 +19,7 @@ gameRoom = {}
 const apiUrl = 'http://localhost/restapi/api.php'
 
 const getBrands = async () => {
-  await fetch(apiUrl) 
+  await fetch(apiUrl, { method: 'GetRandomBrands' }) 
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -28,7 +28,7 @@ const getBrands = async () => {
     return response.json();
   })
   .then(data => {
-    io.emit('startGame', data); 
+    io.emit('gameLoop', data); 
     // console.log(data);
   })
   .catch(error => {
@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
 
       if (countdown < 0) {
         clearInterval(countdownInterval);
-        const brands = getBrands()
+        getBrands()
         // console.log(brands)
         // io.emit('startGame', brands); 
       }
@@ -72,7 +72,7 @@ io.on("connection", (socket) => {
   })
   
   socket.on('disconnect', () => {
-    io.emit('user-disconnected', `${backendPlayers[socket.id][username]} has disconnected.`)
+    io.emit('user-disconnected', `${socket.id} has disconnected.`)
     delete backendPlayers[socket.id]
   })
 })

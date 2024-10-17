@@ -68,20 +68,52 @@
     countdownDisplay.textContent = `Game starts in: ${seconds}`;
   })
   
-  socket.on('startGame', (brands) => {
-    console.log(brands)
+  socket.on('gameLoop', (brands) => {
+    // console.log(brands)
     let countdownDisplay = document.querySelector('#countdown');
     if (countdownDisplay) countdownDisplay.remove();
 
-    let startMessage = document.createElement('div');
-    startMessage.style.display = 'flex'
-    startMessage.style.justifyContent = 'center'
+    let startContainer = document.createElement('div');
+    startContainer.style.display = 'flex'
+    startContainer.style.flexDirection = 'column'
+    startContainer.style.justifyContent = 'center'
+    startContainer.style.alignItems = 'center'
+
     let carImage = document.createElement('img')
+    carImage.style.height = '400px'
+    carImage.style.width = '400px'
     carImage.setAttribute('src', brands[0].image)
-    startMessage.appendChild(carImage)
-    // startMessage.style.left = '40%'
-    // startMessage.style.top = '40%'
-    document.body.appendChild(startMessage);
+
+    let brandForm = document.createElement('form')
+
+    let brandAnswer = document.createElement('input')
+    brandAnswer.placeholder = 'Guess the brand...'
+    brandAnswer.id = 'input-brand'
+
+    let brandButton = document.createElement('button')
+    brandButton.className = 'btn'
+    brandButton.id = 'btn-brand'
+    brandButton.innerText = 'Submit'
+    brandButton.type = 'button'
+    
+    brandForm.appendChild(brandAnswer)
+    brandForm.appendChild(brandButton)
+
+    startContainer.appendChild(carImage)
+    startContainer.appendChild(brandForm)
+    
+    document.body.appendChild(startContainer);
+    
+    document.querySelector('#btn-brand').addEventListener('click', (e) => {
+      e.preventDefault()
+      if (document.querySelector('#input-brand').value != brands[0].brand) {
+        alert("Wrong Guess!")
+      }
+      else {
+        alert("Correct Guess!")
+      }
+      
+    })
     
   })
   

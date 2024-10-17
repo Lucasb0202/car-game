@@ -38,13 +38,7 @@ form {
   width: 50%;
 }
 
-#input-gameId {
-  border: 1px solid black;
-  border-radius: 20px;
-  padding: 10px;
-}
-
-#input-username {
+input {
   border: 1px solid black;
   border-radius: 20px;
   padding: 10px;
