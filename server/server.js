@@ -16,6 +16,26 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 backendPlayers = {}
 gameRoom = {}
 
+const apiUrl = 'http://localhost/restapi/api.php'
+
+const getBrands = async () => {
+  await fetch(apiUrl) 
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    // console.log(response.json())
+    return response.json();
+  })
+  .then(data => {
+    io.emit('startGame', data); 
+    // console.log(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+} 
+
 io.on("connection", (socket) => {
 
   socket.on('newUser', (username) => {
@@ -44,7 +64,9 @@ io.on("connection", (socket) => {
 
       if (countdown < 0) {
         clearInterval(countdownInterval);
-        io.emit('startGame', gameRoom); 
+        const brands = getBrands()
+        // console.log(brands)
+        // io.emit('startGame', brands); 
       }
     }, 1000); 
   })

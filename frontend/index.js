@@ -68,7 +68,8 @@
     countdownDisplay.textContent = `Game starts in: ${seconds}`;
   })
   
-  socket.on('startGame', (gameRoom) => {
+  socket.on('startGame', (brands) => {
+    console.log(brands)
     let countdownDisplay = document.querySelector('#countdown');
     if (countdownDisplay) countdownDisplay.remove();
 
@@ -76,7 +77,7 @@
     startMessage.style.display = 'flex'
     startMessage.style.justifyContent = 'center'
     let carImage = document.createElement('img')
-    carImage.setAttribute('src', '/public/download.png')
+    carImage.setAttribute('src', brands[0].image)
     startMessage.appendChild(carImage)
     // startMessage.style.left = '40%'
     // startMessage.style.top = '40%'
