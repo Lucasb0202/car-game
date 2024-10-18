@@ -67,6 +67,19 @@
     }
     countdownDisplay.textContent = `Game starts in: ${seconds}`;
   })
+
+  socket.on('roundCountdown', (roundCountdown) => {
+    let countdownDisplay = document.querySelector('#roundCountdown');
+    if (!countdownDisplay) {
+      countdownDisplay = document.createElement('h2');
+      countdownDisplay.id = 'roundCountdown';
+      countdownDisplay.style.position = 'absolute'
+      countdownDisplay.style.left = '70%'
+      countdownDisplay.style.top = '10%'
+      document.body.appendChild(countdownDisplay);
+    }
+    countdownDisplay.textContent = `Time left: ${roundCountdown}`;
+  })
   
   socket.on('gameLoop', (brand) => {
     console.log(brand)
@@ -115,10 +128,9 @@
       }
       else {
         alert("Correct Guess!")
+        socket.emit('correct-guess')
       }
-      
     })
-    
   })
   
   socket.on('user', (player) => {
@@ -129,6 +141,19 @@
     heading.appendChild(username)
 
     document.body.appendChild(heading)
+  })
+
+  socket.on('score', (player) => {
+    let scoreDisplay = document.querySelector('#player-score');
+    if (!scoreDisplay) {
+      scoreDisplay = document.createElement('h1')
+      scoreDisplay.id = 'player-score'
+      scoreDisplay.style.position = 'absolute'
+      scoreDisplay.style.top = '5%'
+      document.body.appendChild(scoreDisplay)
+    }
+    scoreDisplay.textContent = "Your score: " + player.score
+
   })
   
   socket.on('user-disconnected', (text) => alert(text))
